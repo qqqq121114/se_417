@@ -410,7 +410,6 @@ onMounted(() => {
   background: #1a1a1a;
   color: #fff;
   font-size: 18px;
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 .profile-panel {
@@ -430,7 +429,7 @@ onMounted(() => {
   box-shadow: none !important;
 }
 
-/* 输入框文字样式 */
+/* 输入框���字样式 */
 :deep(.el-input__inner) {
   color: #00ffff !important;
   caret-color: #00ffff !important;
@@ -531,7 +530,7 @@ onMounted(() => {
   font-size: 1.3rem;
   margin-bottom: 2rem;
   text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
-  font-family: 'Orbitron', sans-serif !important;
+  font-family: 'Orbitron'
 }
 
 /* 滚动条样式 */
@@ -582,7 +581,6 @@ onMounted(() => {
   white-space: pre-wrap;
   margin: 1rem 0;
   font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 .note-footer {
@@ -642,7 +640,6 @@ onMounted(() => {
   color: #00ffff !important;
   background: #1a1a1a !important;
   font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 :deep(.el-select-dropdown__item.hover),
@@ -682,7 +679,7 @@ onMounted(() => {
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.3) !important;
 }
 
-/* 添加保存按钮的加载状态样式 */
+/* ��加保存按钮的加载状态样式 */
 :deep(.el-button--primary.is-loading) {
   background: linear-gradient(45deg, #003333, #330033) !important;
   opacity: 0.8;
@@ -701,7 +698,7 @@ onMounted(() => {
   background: transparent !important;
   color: #00ffff !important;
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-  font-family: 'Orbitron', sans-serif !important;
+  font-family: 'Orbitron'
 }
 
 :deep(.el-input-count-inner),
@@ -749,7 +746,7 @@ onMounted(() => {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textPulse 2s infinite;
-  font-family: 'Orbitron', sans-serif !important;
+  font-family: 'Orbitron'
 }
 
 /* 添加呼吸动画 */
@@ -762,61 +759,66 @@ onMounted(() => {
 /* 笔记标题字体大小 */
 .note-header h3 {
   font-size: 20px !important;
-  font-family: 'Orbitron', sans-serif !important;
+  font-family: 'Orbitron'
 }
 
 /* 笔记内容字体大小 */
 .note-content {
   font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
+  font-family: 'Orbitron'
 }
 
-/* 表单输入框字体 */
-:deep(.el-input__inner),
-:deep(.el-textarea__inner) {
-  font-family: 'Orbitron', sans-serif !important;
-  color: #00ffff !important;
-  background-color: transparent !important;
-}
-
-/* 按钮字体 */
-:deep(.el-button) {
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 下拉菜单选项字体 */
-:deep(.el-select-dropdown__item) {
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 文本计数器字体 */
-:deep(.el-input-count),
-:deep(.el-input__count),
-:deep(.el-textarea__count) {
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-
-
+/* 笔记操作按钮容器 */
 .note-actions {
   display: flex;
   gap: 1rem;
   align-items: center;
-  padding: 0.5rem;
 }
+
 /* 编辑按钮样式 */
 .note-actions .el-button--text {
   color: #00ffff !important;
   font-family: 'Orbitron', sans-serif !important;
   font-size: 16px;
-  border: 2px solid #00ffff !important;
-  background: transparent !important;
-  padding: 8px 15px !important;
-  border-radius: 4px !important;
-  width: 100px;
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
   transition: all 0.3s ease;
 }
 
+/* 删除按钮样式 */
+.note-actions .delete-btn {
+  color: #ff0055 !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 16px;
+  text-shadow: 0 0 5px rgba(255, 0, 85, 0.3);
+  transition: all 0.3s ease;
+}
 
+/* 按钮悬停效果 */
+.note-actions .el-button--text:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
+
+.note-actions .delete-btn:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px rgba(255, 0, 85, 0.8);
+}
+
+/* 笔记卡片样式 */
+.note-card {
+  background: #2a2a2a !important;
+  border: 1px solid #00ffff !important;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.1) !important;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+}
+
+/* 笔记头部样式 */
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+}
 </style> 

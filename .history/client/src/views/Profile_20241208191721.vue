@@ -404,22 +404,27 @@ onMounted(() => {
 <style scoped>
 .profile-container {
   display: flex;
-  padding: 2rem;
-  gap: 2rem;
+  padding: 1rem;
+  gap: 1rem;
   min-height: calc(100vh - 60px);
   background: #1a1a1a;
   color: #fff;
-  font-size: 18px;
-  font-family: 'Orbitron', sans-serif !important;
+  font-size: 16px;
 }
 
 .profile-panel {
   flex: 1;
   background: #2a2a2a;
   border-radius: 10px;
-  padding: 3rem;
-  box-shadow: 0 0 20px rgba(7, 207, 222, 0.902);
+  padding: 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
   border: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.profile-panel h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #00ffff;
 }
 
 /* 输入框和文本框的基础样式 */
@@ -428,6 +433,7 @@ onMounted(() => {
   background-color: #1a1a1a !important;
   border: 1px solid #00ffff !important;
   box-shadow: none !important;
+  font-size: 1.1rem !important;
 }
 
 /* 输入框文字样式 */
@@ -435,141 +441,52 @@ onMounted(() => {
   color: #00ffff !important;
   caret-color: #00ffff !important;
   background-color: transparent !important;
-  font-size: 18px !important;
+  font-size: 1.1rem !important;
 }
 
-/* 文本框文字样式 */
-:deep(.el-textarea__inner) {
-  color: #00ffff !important;
-  caret-color: #00ffff !important;
-  background-color: #1a1a1a !important;
-  border: none !important;
-  resize: none !important;
-  font-size: 18px !important;
-}
-
-/* 输入框和文本框焦点状态 */
-:deep(.el-input__wrapper.is-focus),
-:deep(.el-textarea__wrapper.is-focus) {
-  border-color: #ff00ff !important;
-  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3) !important;
-}
-
-/* 输入框和文本框悬停状态 */
-:deep(.el-input__wrapper:hover),
-:deep(.el-textarea__wrapper:hover) {
-  border-color: #ff00ff !important;
-}
-
-/* 文本计数器样式 */
-:deep(.el-input__count-inner),
-:deep(.el-textarea__count) {
-  background: transparent !important;
-  color: #00ffff !important;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-}
-
-/* 占位符文字样式 */
-:deep(.el-input__inner::placeholder),
-:deep(.el-textarea__inner::placeholder) {
-  color: rgba(0, 255, 255, 0.5) !important;
-}
-
-/* 标签样式 */
+/* 表单项样式 */
 :deep(.el-form-item__label) {
-  color: #00ffff !important;
-  font-weight: bold;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-  font-size: 18px !important;
+  font-size: 1.1rem !important;
+  color: #fff !important;
+  margin-bottom: 0.5rem !important;
 }
 
-/* 按钮样式 */
-:deep(.el-button--primary) {
-  background: linear-gradient(45deg, #00ffff, #ff00ff) !important;
-  border: none !important;
-  color: #1a1a1a !important;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  font-size: 18px !important;
-}
-
-:deep(.el-button--primary:hover) {
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(255, 0, 255, 0.4) !important;
-}
-
-.avatar-section {
-  text-align: center;
-  margin-bottom: 0.004rem;
-}
-
-.avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 1rem;
-  border: 3px solid #00ffff;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-  object-fit: cover;
-  background-color: #1a1a1a;
-}
-
-.info-section {
-  margin-bottom: 2rem;
-}
-
-.info-section h2 {
-  color: #00ffff;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-  margin-bottom: 1rem;
-}
-
-.join-date {
-  color: #ff00ff;
-  font-size: 1.3rem;
-  margin-bottom: 2rem;
-  text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 滚动条样式 */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #00ffff, #ff00ff);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #ff00ff, #00ffff);
-}
-
+/* 笔记面板样式 */
 .notes-panel {
   flex: 2;
+  padding: 0 1rem;
 }
 
 .notes-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.notes-header h2 {
+  font-size: 1.8rem;
+  color: #00ffff;
+  margin: 0;
 }
 
 .notes-list {
   display: grid;
   gap: 1rem;
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  padding-right: 0.5rem;
 }
 
 .note-card {
-  margin-bottom: 1rem;
+  background: #2a2a2a !important;
+  border: 1px solid rgba(0, 255, 255, 0.2) !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.note-card :deep(.el-card__header) {
+  padding: 1rem !important;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1) !important;
 }
 
 .note-header {
@@ -578,30 +495,73 @@ onMounted(() => {
   align-items: center;
 }
 
+.note-header h3 {
+  font-size: 1.3rem;
+  margin: 0;
+  color: #00ffff;
+}
+
 .note-content {
+  font-size: 1.1rem;
   white-space: pre-wrap;
-  margin: 1rem 0;
-  font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
+  margin: 0.5rem 0;
+  line-height: 1.4;
 }
 
 .note-footer {
-  color: var(--el-text-color-secondary);
-  font-size: 0.9em;
+  color: #888;
+  font-size: 0.9rem;
 }
 
-.delete-btn {
-  color: var(--el-color-danger);
+/* 按钮样式 */
+:deep(.el-button) {
+  font-size: 1.1rem !important;
+  padding: 0.5rem 1rem !important;
+}
+
+/* 对话框样式 */
+:deep(.el-dialog) {
+  background: #2a2a2a !important;
+  border: 1px solid rgba(0, 255, 255, 0.2) !important;
+}
+
+:deep(.el-dialog__title) {
+  color: #00ffff !important;
+  font-size: 1.5rem !important;
+}
+
+:deep(.el-dialog__body) {
+  color: #fff !important;
+  font-size: 1.1rem !important;
+}
+
+/* 滚动条样式 */
+.notes-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notes-list::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.notes-list::-webkit-scrollbar-thumb {
+  background: #00ffff;
+  border-radius: 3px;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .profile-container {
     flex-direction: column;
+    padding: 0.5rem;
   }
 
-  .profile-panel {
-    max-width: 100%;
+  .profile-panel, .notes-panel {
+    width: 100%;
+  }
+
+  .notes-list {
+    max-height: none;
   }
 }
 
@@ -620,203 +580,71 @@ onMounted(() => {
   border-color: #00ffff !important;
 }
 
-:deep(.el-select .el-input__inner) {
-  color: #00ffff !important;
-  background-color: #1a1a1a !important;
-}
-
-:deep(.el-select .el-input .el-select__caret) {
-  color: #00ffff !important;
-}
-
-/* 下拉菜单样式 */
-:deep(.el-popper.el-select__popper),
-:deep(.el-select__popper.el-popper),
-:deep(.el-select-dropdown.el-popper) {
-  background-color: #1a1a1a !important;
-  border: 1px solid #00ffff !important;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3) !important;
-}
-
 :deep(.el-select-dropdown__item) {
+  font-size: 1.1rem !important;
+  padding: 0.5rem 1rem !important;
+}
+
+:deep(.el-select-dropdown__item.selected) {
   color: #00ffff !important;
-  background: #1a1a1a !important;
-  font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
+  font-weight: bold !important;
+}
+
+/* 表单验证消息 */
+:deep(.el-form-item__error) {
+  font-size: 0.9rem !important;
+  color: #ff4444 !important;
+}
+
+/* 笔记操作按钮 */
+.note-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.note-actions :deep(.el-button) {
+  padding: 0.3rem 0.8rem !important;
+  font-size: 1rem !important;
+}
+
+.delete-btn {
+  color: #ff4444 !important;
+}
+
+/* 确保所有文本输入都是白色 */
+:deep(.el-input__inner),
+:deep(.el-textarea__inner) {
+  color: #fff !important;
+}
+
+/* 下拉菜单选项 */
+:deep(.el-select-dropdown__item) {
+  color: #fff !important;
 }
 
 :deep(.el-select-dropdown__item.hover),
 :deep(.el-select-dropdown__item:hover) {
   background-color: rgba(0, 255, 255, 0.1) !important;
-  color: #ff00ff !important;
 }
 
-:deep(.el-select-dropdown__item.selected) {
-  color: #ff00ff !important;
-  background-color: rgba(0, 255, 255, 0.2) !important;
-}
-
-/* 修复下拉框头和背景 */
-:deep(.el-popper.is-light),
 :deep(.el-select-dropdown) {
-  background-color: #1a1a1a !important;
-  border-color: #00ffff !important;
+  background-color: #2a2a2a !important;
+  border: 1px solid rgba(0, 255, 255, 0.2) !important;
 }
 
-:deep(.el-popper.is-light .el-popper__arrow::before) {
-  background: #1a1a1a !important;
-  border-color: #00ffff !important;
+/* 表单项间距 */
+:deep(.el-form-item) {
+  margin-bottom: 1rem !important;
 }
 
-:deep(.el-scrollbar),
-:deep(.el-select-dropdown .el-scrollbar__wrap) {
-  background-color: #1a1a1a !important;
+/* 对话框内容区域 */
+:deep(.el-dialog__body) {
+  padding: 1rem !important;
 }
 
-:deep(.el-select-dropdown .el-scrollbar__view) {
-  background-color: #1a1a1a !important;
+/* 对话框按钮 */
+:deep(.el-dialog__footer) {
+  padding: 1rem !important;
+  border-top: 1px solid rgba(0, 255, 255, 0.1) !important;
 }
-
-/* 确保下拉框在所有状态下保持样式 */
-:deep(.el-select .el-input.is-focus .el-input__wrapper) {
-  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3) !important;
-}
-
-/* 添加保存按钮的加载状态样式 */
-:deep(.el-button--primary.is-loading) {
-  background: linear-gradient(45deg, #003333, #330033) !important;
-  opacity: 0.8;
-}
-
-/* 表单验证错误提示样式 */
-:deep(.el-form-item__error) {
-  color: #ff4444 !important;
-  text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
-}
-
-/* 文本框字数统计器的赛博朋克风格 */
-:deep(.el-input-count),
-:deep(.el-input__count),
-:deep(.el-textarea__count) {
-  background: transparent !important;
-  color: #00ffff !important;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-:deep(.el-input-count-inner),
-:deep(.el-input__count-inner),
-:deep(.el-textarea__wordcount) {
-  background: transparent !important;
-  color: #00ffff !important;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-}
-
-/* 确保文本框本身的样式 */
-:deep(.el-textarea__inner) {
-  background-color: #1a1a1a !important;
-  border: 1px solid #00ffff !important;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2) !important;
-  color: #00ffff !important;
-  resize: none !important;
-}
-
-:deep(.el-textarea__inner:focus) {
-  border-color: #ff00ff !important;
-  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3) !important;
-}
-
-/* 覆盖所有可能的白色背景 */
-:deep(.el-textarea) {
-  --el-input-count-color: #00ffff !important;
-  --el-input-count-background: transparent !important;
-}
-
-:deep(.el-textarea .el-input__count) {
-  background: transparent !important;
-  color: #00ffff !important;
-}
-
-/* 标题字体大小 */
-.profile-panel h3 {
-  font-size: 30px !important;
-  background: #2a2a2a;
-  color: #00ffff !important;
-  text-shadow: 0 0 10px rgba(184, 14, 231, 0.5),
-               0 0 20px rgba(202, 17, 234, 0.3),
-               0 0 30px rgba(0, 255, 255, 0.2);
-  background: linear-gradient(45deg, #ce10cb, #ff00ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: textPulse 2s infinite;
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 添加呼吸动画 */
-@keyframes textPulse {
-  0% { text-shadow: 0 0 10px rgba(200, 15, 225, 0.5); }
-  50% { text-shadow: 0 0 20px rgba(247, 10, 219, 0.8); }
-  100% { text-shadow: 0 0 10px rgba(220, 10, 235, 0.5); }
-}
-
-/* 笔记标题字体大小 */
-.note-header h3 {
-  font-size: 20px !important;
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 笔记内容字体大小 */
-.note-content {
-  font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 表单输入框字体 */
-:deep(.el-input__inner),
-:deep(.el-textarea__inner) {
-  font-family: 'Orbitron', sans-serif !important;
-  color: #00ffff !important;
-  background-color: transparent !important;
-}
-
-/* 按钮字体 */
-:deep(.el-button) {
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 下拉菜单选项字体 */
-:deep(.el-select-dropdown__item) {
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 文本计数器字体 */
-:deep(.el-input-count),
-:deep(.el-input__count),
-:deep(.el-textarea__count) {
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-
-
-.note-actions {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  padding: 0.5rem;
-}
-/* 编辑按钮样式 */
-.note-actions .el-button--text {
-  color: #00ffff !important;
-  font-family: 'Orbitron', sans-serif !important;
-  font-size: 16px;
-  border: 2px solid #00ffff !important;
-  background: transparent !important;
-  padding: 8px 15px !important;
-  border-radius: 4px !important;
-  width: 100px;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-
 </style> 

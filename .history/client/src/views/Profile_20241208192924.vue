@@ -409,16 +409,14 @@ onMounted(() => {
   min-height: calc(100vh - 60px);
   background: #1a1a1a;
   color: #fff;
-  font-size: 18px;
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 .profile-panel {
   flex: 1;
   background: #2a2a2a;
-  border-radius: 10px;
-  padding: 3rem;
-  box-shadow: 0 0 20px rgba(7, 207, 222, 0.902);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
   border: 1px solid rgba(0, 255, 255, 0.1);
 }
 
@@ -428,24 +426,21 @@ onMounted(() => {
   background-color: #1a1a1a !important;
   border: 1px solid #00ffff !important;
   box-shadow: none !important;
+  font-size: 1.4rem !important;
 }
 
 /* 输入框文字样式 */
 :deep(.el-input__inner) {
-  color: #00ffff !important;
+  color: #fff !important;
   caret-color: #00ffff !important;
   background-color: transparent !important;
-  font-size: 18px !important;
+  font-size: 1.4rem !important;
 }
 
 /* 文本框文字样式 */
 :deep(.el-textarea__inner) {
-  color: #00ffff !important;
-  caret-color: #00ffff !important;
-  background-color: #1a1a1a !important;
-  border: none !important;
-  resize: none !important;
-  font-size: 18px !important;
+  font-size: 1.4rem !important;
+  color: #fff !important;
 }
 
 /* 输入框和文本框焦点状态 */
@@ -461,7 +456,7 @@ onMounted(() => {
   border-color: #ff00ff !important;
 }
 
-/* 文本计数器样式 */
+/* 文本框字数统计器样式 */
 :deep(.el-input__count-inner),
 :deep(.el-textarea__count) {
   background: transparent !important;
@@ -477,10 +472,10 @@ onMounted(() => {
 
 /* 标签样式 */
 :deep(.el-form-item__label) {
-  color: #00ffff !important;
-  font-weight: bold;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-  font-size: 18px !important;
+  font-size: 1.4rem !important;
+  color: #fff !important;
+  margin-bottom: 0.5rem !important;
+  font-weight: bold !important;
 }
 
 /* 按钮样式 */
@@ -492,7 +487,6 @@ onMounted(() => {
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  font-size: 18px !important;
 }
 
 :deep(.el-button--primary:hover) {
@@ -502,12 +496,12 @@ onMounted(() => {
 
 .avatar-section {
   text-align: center;
-  margin-bottom: 0.004rem;
+  margin-bottom: 2rem;
 }
 
 .avatar {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   margin-bottom: 1rem;
   border: 3px solid #00ffff;
@@ -527,11 +521,10 @@ onMounted(() => {
 }
 
 .join-date {
-  color: #ff00ff;
-  font-size: 1.3rem;
+  color: #f00df0;
+  font-size: 0.9rem;
   margin-bottom: 2rem;
   text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 /* 滚动条样式 */
@@ -540,7 +533,7 @@ onMounted(() => {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #211f1f;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -581,8 +574,6 @@ onMounted(() => {
 .note-content {
   white-space: pre-wrap;
   margin: 1rem 0;
-  font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 .note-footer {
@@ -639,10 +630,10 @@ onMounted(() => {
 }
 
 :deep(.el-select-dropdown__item) {
+  font-size: 1.4rem !important;
+  padding: 0.8rem 1rem !important;
   color: #00ffff !important;
   background: #1a1a1a !important;
-  font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 :deep(.el-select-dropdown__item.hover),
@@ -688,10 +679,11 @@ onMounted(() => {
   opacity: 0.8;
 }
 
-/* 表单验证错误提示样式 */
+/* 表单验证错误提��样式 */
 :deep(.el-form-item__error) {
+  font-size: 1.2rem !important;
   color: #ff4444 !important;
-  text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+  margin-top: 0.5rem;
 }
 
 /* 文本框字数统计器的赛博朋克风格 */
@@ -701,7 +693,6 @@ onMounted(() => {
   background: transparent !important;
   color: #00ffff !important;
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 :deep(.el-input-count-inner),
@@ -737,86 +728,34 @@ onMounted(() => {
   color: #00ffff !important;
 }
 
-/* 标题字体大小 */
+/* 个人信息标题 */
 .profile-panel h3 {
-  font-size: 30px !important;
-  background: #2a2a2a;
-  color: #00ffff !important;
-  text-shadow: 0 0 10px rgba(184, 14, 231, 0.5),
-               0 0 20px rgba(202, 17, 234, 0.3),
-               0 0 30px rgba(0, 255, 255, 0.2);
-  background: linear-gradient(45deg, #ce10cb, #ff00ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: textPulse 2s infinite;
-  font-family: 'Orbitron', sans-serif !important;
+  font-size: 2rem !important;
+  margin-bottom: 1.5rem;
+  color: #00ffff;
+  font-weight: bold;
 }
 
-/* 添加呼吸动画 */
-@keyframes textPulse {
-  0% { text-shadow: 0 0 10px rgba(200, 15, 225, 0.5); }
-  50% { text-shadow: 0 0 20px rgba(247, 10, 219, 0.8); }
-  100% { text-shadow: 0 0 10px rgba(220, 10, 235, 0.5); }
-}
-
-/* 笔记标题字体大小 */
-.note-header h3 {
-  font-size: 20px !important;
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 笔记内容字体大小 */
-.note-content {
-  font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 表单输入框字体 */
-:deep(.el-input__inner),
-:deep(.el-textarea__inner) {
-  font-family: 'Orbitron', sans-serif !important;
-  color: #00ffff !important;
-  background-color: transparent !important;
-}
-
-/* 按钮字体 */
+/* 按钮文字 */
 :deep(.el-button) {
-  font-family: 'Orbitron', sans-serif !important;
+  font-size: 1.4rem !important;
+  padding: 0.8rem 1.5rem !important;
 }
 
-/* 下拉菜单选项字体 */
-:deep(.el-select-dropdown__item) {
-  font-family: 'Orbitron', sans-serif !important;
+/* 确保输入框高度适应更大的字体 */
+:deep(.el-input__wrapper) {
+  height: auto !important;
+  min-height: 48px !important;
 }
 
-/* 文本计数器字体 */
-:deep(.el-input-count),
-:deep(.el-input__count),
-:deep(.el-textarea__count) {
-  font-family: 'Orbitron', sans-serif !important;
+/* 调整表单项之间的间距 */
+:deep(.el-form-item) {
+  margin-bottom: 2rem !important;
 }
 
-
-
-.note-actions {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  padding: 0.5rem;
+/* 调整输入框内边距 */
+:deep(.el-input__inner) {
+  padding: 0.8rem 1rem !important;
+  line-height: 1.5 !important;
 }
-/* 编辑按钮样式 */
-.note-actions .el-button--text {
-  color: #00ffff !important;
-  font-family: 'Orbitron', sans-serif !important;
-  font-size: 16px;
-  border: 2px solid #00ffff !important;
-  background: transparent !important;
-  padding: 8px 15px !important;
-  border-radius: 4px !important;
-  width: 100px;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-
 </style> 

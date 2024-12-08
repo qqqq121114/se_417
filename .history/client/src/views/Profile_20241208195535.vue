@@ -796,27 +796,25 @@ onMounted(() => {
   font-family: 'Orbitron', sans-serif !important;
 }
 
-
-
-.note-actions {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  padding: 0.5rem;
-}
 /* 编辑按钮样式 */
 .note-actions .el-button--text {
-  color: #00ffff !important;
+  color: #f806fc !important;
   font-family: 'Orbitron', sans-serif !important;
   font-size: 16px;
-  border: 2px solid #00ffff !important;
-  background: transparent !important;
-  padding: 8px 15px !important;
-  border-radius: 4px !important;
+
   width: 100px;
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
   transition: all 0.3s ease;
 }
 
+/* 按钮悬停效果 */
+.note-actions .el-button--text:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+}
 
+.note-actions .delete-btn:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px rgba(255, 0, 85, 0.8);
+}
 </style> 

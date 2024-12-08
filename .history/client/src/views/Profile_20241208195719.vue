@@ -817,6 +817,4 @@ onMounted(() => {
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
   transition: all 0.3s ease;
 }
-
-
 </style> 

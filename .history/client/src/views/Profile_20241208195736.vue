@@ -818,5 +818,18 @@ onMounted(() => {
   transition: all 0.3s ease;
 }
 
+/* 按钮悬停效果 */
+.note-actions .el-button--text:hover {
+  color: rgba(0, 255, 255, 0.7) !important;
+  border-color: rgba(0, 255, 255, 0.7) !important;
+  background: rgba(0, 255, 255, 0.1) !important;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
 
+.note-actions .delete-btn:hover {
+  color: rgba(0, 255, 255, 0.7) !important;
+  border-color: rgba(0, 255, 255, 0.7) !important;
+  background: rgba(0, 255, 255, 0.1) !important;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
 </style> 

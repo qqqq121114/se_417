@@ -796,7 +796,16 @@ onMounted(() => {
   font-family: 'Orbitron', sans-serif !important;
 }
 
+/* 编辑按钮样式 */
+.note-actions .el-button--text {
+  color: #f806fc !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 16px;
 
+  width: 100px;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
 
 .note-actions {
   display: flex;
@@ -817,6 +826,4 @@ onMounted(() => {
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
   transition: all 0.3s ease;
 }
-
-
 </style> 

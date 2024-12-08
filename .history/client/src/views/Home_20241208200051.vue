@@ -60,12 +60,8 @@
 .content {
   position: relative;
   z-index: 1;
-  text-align: center;
-  padding: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  color: #00ffff;
+  font-family: 'Orbitron', sans-serif;
 }
 
 /* 可选：添加霓虹边框效果 */
@@ -143,10 +139,6 @@
   z-index: 1;
   text-align: center;
   padding: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .cyber-glitch-2 {
@@ -154,7 +146,11 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 20px;
-  font-family: 'Orbitron', sans-serif;
+  position: relative;
+  text-shadow: 
+    2px 2px 0px #ff0000,
+    -2px -2px 0px #00ff00;
+  animation: glitch 3s infinite;
 }
 
 .cyber-text {
@@ -162,7 +158,7 @@
   letter-spacing: 0.2em;
   opacity: 0.8;
   text-shadow: 0 0 10px var(--cyber-glow);
-  font-family: 'Orbitron', sans-serif;
+  animation: breathe 3s ease-in-out infinite;
 }
 
 /* 动画定义 */

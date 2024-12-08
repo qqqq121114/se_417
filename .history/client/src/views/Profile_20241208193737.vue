@@ -410,14 +410,13 @@ onMounted(() => {
   background: #1a1a1a;
   color: #fff;
   font-size: 18px;
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 .profile-panel {
   flex: 1;
   background: #2a2a2a;
-  border-radius: 10px;
-  padding: 3rem;
+  border-radius: 15px;
+  padding: 2rem;
   box-shadow: 0 0 20px rgba(7, 207, 222, 0.902);
   border: 1px solid rgba(0, 255, 255, 0.1);
 }
@@ -502,12 +501,12 @@ onMounted(() => {
 
 .avatar-section {
   text-align: center;
-  margin-bottom: 0.004rem;
+  margin-bottom: 2rem;
 }
 
 .avatar {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   margin-bottom: 1rem;
   border: 3px solid #00ffff;
@@ -528,10 +527,9 @@ onMounted(() => {
 
 .join-date {
   color: #ff00ff;
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   margin-bottom: 2rem;
   text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 /* 滚动条样式 */
@@ -582,7 +580,6 @@ onMounted(() => {
   white-space: pre-wrap;
   margin: 1rem 0;
   font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 .note-footer {
@@ -642,7 +639,6 @@ onMounted(() => {
   color: #00ffff !important;
   background: #1a1a1a !important;
   font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 :deep(.el-select-dropdown__item.hover),
@@ -701,7 +697,6 @@ onMounted(() => {
   background: transparent !important;
   color: #00ffff !important;
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 :deep(.el-input-count-inner),
@@ -739,7 +734,7 @@ onMounted(() => {
 
 /* 标题字体大小 */
 .profile-panel h3 {
-  font-size: 30px !important;
+  font-size: 40px !important;
   background: #2a2a2a;
   color: #00ffff !important;
   text-shadow: 0 0 10px rgba(184, 14, 231, 0.5),
@@ -749,74 +744,22 @@ onMounted(() => {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textPulse 2s infinite;
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 /* 添加呼吸动画 */
 @keyframes textPulse {
   0% { text-shadow: 0 0 10px rgba(200, 15, 225, 0.5); }
-  50% { text-shadow: 0 0 20px rgba(247, 10, 219, 0.8); }
-  100% { text-shadow: 0 0 10px rgba(220, 10, 235, 0.5); }
+  50% { text-shadow: 0 0 20px rgba(0, 255, 255, 0.8); }
+  100% { text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); }
 }
 
 /* 笔记标题字体大小 */
 .note-header h3 {
   font-size: 20px !important;
-  font-family: 'Orbitron', sans-serif !important;
 }
 
 /* 笔记内容字体大小 */
 .note-content {
   font-size: 18px !important;
-  font-family: 'Orbitron', sans-serif !important;
 }
-
-/* 表单输入框字体 */
-:deep(.el-input__inner),
-:deep(.el-textarea__inner) {
-  font-family: 'Orbitron', sans-serif !important;
-  color: #00ffff !important;
-  background-color: transparent !important;
-}
-
-/* 按钮字体 */
-:deep(.el-button) {
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 下拉菜单选项字体 */
-:deep(.el-select-dropdown__item) {
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-/* 文本计数器字体 */
-:deep(.el-input-count),
-:deep(.el-input__count),
-:deep(.el-textarea__count) {
-  font-family: 'Orbitron', sans-serif !important;
-}
-
-
-
-.note-actions {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  padding: 0.5rem;
-}
-/* 编辑按钮样式 */
-.note-actions .el-button--text {
-  color: #00ffff !important;
-  font-family: 'Orbitron', sans-serif !important;
-  font-size: 16px;
-  border: 2px solid #00ffff !important;
-  background: transparent !important;
-  padding: 8px 15px !important;
-  border-radius: 4px !important;
-  width: 100px;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-
 </style> 
