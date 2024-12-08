@@ -12,4 +12,10 @@ router.post('/login', userController.login);
 // 获取个人信息路由（需要认证）
 router.get('/profile', auth, userController.getProfile);
 
+// 用户管理路由
+router.get('/', userController.getAllUsers);
+router.get('/:id', userController.getUser);
+router.put('/:id', userController.updateUser);
+router.delete('/:id', userController.deleteUser);
+
 module.exports = router; 
