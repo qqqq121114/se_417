@@ -343,12 +343,9 @@ const submitForm = async () => {
   font-family: 'Share Tech Mono', monospace;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-size: 0.95em !important;
-  padding: 4px 8px!important;
+  font-size: 0.9em !important;
+  padding: 1 !important;
   height: auto !important;
-  
-  
-  
 }
 
 .register-link:hover {

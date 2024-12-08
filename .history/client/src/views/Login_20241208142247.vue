@@ -346,9 +346,9 @@ const submitForm = async () => {
   font-size: 0.95em !important;
   padding: 4px 8px!important;
   height: auto !important;
+  border: none !important;
   
-  
-  
+  transition: all 0.3s ease;
 }
 
 .register-link:hover {
