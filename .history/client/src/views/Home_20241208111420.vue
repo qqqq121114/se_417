@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <div class="welcome-container">
-      <h1 class="cyber-title noselect">Welcome</h1>
+      <h1 class="cyber-title noselect">Welcome!</h1>
       <div class="button-group">
         <el-button class="cyber-button" size="large" @click="$router.push('/register')">REGISTER</el-button>
-        <el-button class="cyber-button" size="large" @click="$router.push('/login')">LOGIN</el-button>
+        <el-button class="cyber-button" size="large">LOGIN</el-button>
       </div>
     </div>
   </div>
@@ -24,11 +24,11 @@
 
 .welcome-container {
   text-align: center;
-  width: 60vw;
+  width: 70vw;
 }
 
 .cyber-title {
-  font-size: 8vw;
+  font-size: 10vw;
   color: var(--cyber-text);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -42,7 +42,6 @@
   -moz-user-select: none;
   -ms-user-select: none;
   cursor: default;
-  white-space: nowrap;
 }
 
 .button-group {
@@ -74,8 +73,7 @@
 /* 响应式设计 */
 @media (max-width: 768px) {
   .cyber-title {
-    font-size: 12vw;
-    white-space: normal;
+    font-size: 15vw;
   }
 
   .button-group {

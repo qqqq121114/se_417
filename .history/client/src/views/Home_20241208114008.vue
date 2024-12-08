@@ -3,8 +3,8 @@
     <div class="welcome-container">
       <h1 class="cyber-title noselect">Welcome</h1>
       <div class="button-group">
-        <el-button class="cyber-button" size="large" @click="$router.push('/register')">REGISTER</el-button>
-        <el-button class="cyber-button" size="large" @click="$router.push('/login')">LOGIN</el-button>
+        <el-button class="cyber-button" size="large" @click="$router.push('/register')">Start The Game Journey !</el-button>
+        <el-button class="cyber-button" size="large">LOGIN</el-button>
       </div>
     </div>
   </div>

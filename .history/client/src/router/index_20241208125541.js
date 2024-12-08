@@ -20,8 +20,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue'),
-    props: route => ({ key: Date.now() })
+    component: () => import('../views/Login.vue')
   }
 ]
 
