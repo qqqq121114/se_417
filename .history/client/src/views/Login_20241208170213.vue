@@ -89,7 +89,7 @@ const submitForm = async () => {
     console.log('Login successful:', response.data)
     // 保存token到localStorage
     localStorage.setItem('token', response.data.token)
-    ElMessage.success('登录成功！')
+    ElMessage.success('Login Successful！')
     
     // 登录成功后跳转到个人信息页面
     setTimeout(() => {

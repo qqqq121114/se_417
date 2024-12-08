@@ -28,32 +28,32 @@ import 'element-plus/dist/index.css'
   box-sizing: border-box;
 }
 
-:root {
-  --cyber-text: #ffb800;
-  --cyber-glow: rgba(255, 184, 0, 0.5);
-  --cyber-border: rgba(255, 184, 0, 0.3);
-}
-
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  font-family: 'Share Tech Mono', monospace;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-  color: var(--cyber-text);
+  height: 100%;
+  overflow-x: hidden;
+  background-color: var(--cyber-bg);
+}
+
+:root {
+  --cyber-bg: #1a1a1a;
+  --cyber-text: #FFB800;
+  --cyber-glow: #FFB80033;
+  --cyber-border: #333333;
 }
 
 #app {
-  height: 100vh;
-  overflow: hidden;
-}
-
-.main-content {
-  height: calc(100vh - 60px);
-  margin-top: 60px;
-  overflow: hidden;
+  font-family: 'Share Tech Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--cyber-text);
+  background-color: var(--cyber-bg);
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .cyber-theme {

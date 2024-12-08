@@ -61,31 +61,30 @@ const form = reactive({
 // 验证规则
 const rules = {
   username: [
-    { required: true, message: '请输入用户名', trigger: 'blur' },
-    { min: 3, max: 20, message: '用户名长度应为3-20个字符', trigger: 'blur' },
-    { 
-      pattern: /^[a-zA-Z0-9_]+$/, 
-      message: '用户名只能包含字母、数字和下划线', 
-      trigger: 'blur' 
-    }
+    { required: true, message: 'Please enter your username', trigger: 'blur' },
+    { min: 3, max: 20, message: 'Length should be 3 to 20 characters', trigger: 'blur' },
+    { pattern: /^[a-zA-Z0-9_]+$/, message: 'Only letters, numbers and underscore allowed', trigger: 'blur' }
   ],
   password: [
-    { required: true, message: '请输入密码', trigger: 'blur' },
-    { min: 6, message: '密码长度不能少于6个字符', trigger: 'blur' }
+    { required: true, message: 'Please enter your password', trigger: 'blur' },
+    { min: 6, message: 'Password must be at least 6 characters', trigger: 'blur' },
+    { 
+      pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+      message: 'Password must contain both letters and numbers',
+      trigger: 'blur'
+    }
   ],
   confirmPassword: [
-    { required: true, message: '请确认密码', trigger: 'blur' },
+    { required: true, message: 'Please confirm your password', trigger: 'blur' },
     {
       validator: (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'))
-        } else if (value !== form.password) {
-          callback(new Error('两次输入的密码不一致'))
+        if (value !== form.password) {
+          callback(new Error('Passwords do not match!'))
         } else {
           callback()
         }
       },
-      trigger: ['blur', 'change']
+      trigger: 'blur'
     }
   ]
 }
@@ -95,57 +94,43 @@ const submitForm = async () => {
   if (!formRef.value) return
   
   try {
-    // 表单验证
-    const validationResult = await formRef.value.validate()
-      .catch(err => {
-        // 处理验证错误
-        console.error('Validation errors:', err);
-        const errors = Object.values(err.fields).map(field => field[0].message);
-        ElMessage.error(errors[0]); // 显示第一个错误信息
-        throw err;
-      });
-
-    if (!validationResult) return;
-
+    await formRef.value.validate()
+    
     // 发送注册请求
-    console.log('Sending registration request...');
-    const response = await axios.post('http://localhost:3001/api/users/register', {
+    const response = await axios.post('http://localhost:3000/api/users/register', {
       username: form.username,
       password: form.password
-    });
+    })
 
-    console.log('Registration response:', response.data);
-    ElMessage.success('注册成功！');
+    ElMessage.success('Registration successful!')
+    console.log('User registered:', response.data)
     
-    // 注册成功后跳转到登录页面
+    // 注册成功后跳转到首页
     setTimeout(() => {
-      router.push('/login');
-    }, 1500);
+      router.push('/')
+    }, 1500)
   } catch (error) {
     if (error.response) {
       // 服务器返回的错误信息
-      console.error('Server error:', error.response.data);
-      ElMessage.error(error.response.data.message || '注册失败');
-    } else if (error.name === 'ValidationError') {
-      // 已经在上面处理了验证错误
-      return;
+      ElMessage.error(error.response.data.message || 'Registration failed')
+    } else if (error.message) {
+      // 表单验证错误
+      ElMessage.error('Please check your input!')
     } else {
-      // 其他错误
-      console.error('Registration error:', error);
-      ElMessage.error('注册失败，请稍后重试');
+      ElMessage.error('Registration failed')
     }
+    console.error('Registration error:', error)
   }
-};
+}
 </script>
 
 <style scoped>
 .register {
-  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
-  overflow: hidden;
+  min-height: calc(100vh - 60px);
 }
 
 .cyber-title {

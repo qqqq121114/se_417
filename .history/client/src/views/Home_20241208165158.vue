@@ -18,7 +18,7 @@
 
 <style scoped>
 .home {
-  height: calc(100vh - 60px);
+  min-height: 100vh;
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);

@@ -61,11 +61,11 @@ const form = reactive({
 // 验证规则
 const rules = {
   username: [
-    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { required: true, message: 'Please enter your username', trigger: 'blur' },
     { min: 3, max: 20, message: 'Length should be 3 to 20 characters', trigger: 'blur' }
   ],
   password: [
-    { required: true, message: '请输入你的密码', trigger: 'blur' },
+    { required: true, message: 'Please enter your password', trigger: 'blur' },
     { min: 6, message: 'Password must be at least 6 characters', trigger: 'blur' }
   ]
 }
@@ -89,7 +89,7 @@ const submitForm = async () => {
     console.log('Login successful:', response.data)
     // 保存token到localStorage
     localStorage.setItem('token', response.data.token)
-    ElMessage.success('登录成功！')
+    ElMessage.success('Login Successful！')
     
     // 登录成功后跳转到个人信息页面
     setTimeout(() => {

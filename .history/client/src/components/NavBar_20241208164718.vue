@@ -1,75 +1,14 @@
 <template>
-  <div id="app" class="cyber-theme">
-    <nav class="cyber-nav">
-      <router-link to="/" class="nav-brand">CyberGame</router-link>
-      <div class="nav-links">
-        <router-link to="/register" class="cyber-button">Register</router-link>
-        <router-link to="/login" class="cyber-button">Login</router-link>
-      </div>
-    </nav>
-    <el-main>
-      <router-view></router-view>
-    </el-main>
-  </div>
+  <nav class="cyber-nav">
+    <router-link to="/" class="nav-brand">CyberGame</router-link>
+    <div class="nav-links">
+      <router-link to="/register" class="cyber-button">Register</router-link>
+      <router-link to="/login" class="cyber-button">Login</router-link>
+    </div>
+  </nav>
 </template>
 
-<script setup>
-import { ElMain } from 'element-plus'
-import 'element-plus/dist/index.css'
-</script>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
-/* 重置默认样式 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --cyber-text: #ffb800;
-  --cyber-glow: rgba(255, 184, 0, 0.5);
-  --cyber-border: rgba(255, 184, 0, 0.3);
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  font-family: 'Share Tech Mono', monospace;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-  color: var(--cyber-text);
-}
-
-#app {
-  height: 100vh;
-  overflow: hidden;
-}
-
-.main-content {
-  height: calc(100vh - 60px);
-  margin-top: 60px;
-  overflow: hidden;
-}
-
-.cyber-theme {
-  background: var(--cyber-bg);
-  min-height: 100vh;
-  width: 100%;
-}
-
-.el-main {
-  padding: 20px;
-  background: var(--cyber-bg);
-  margin: 0;
-  margin-top: 60px;
-}
-
-/* 导航栏样式 */
+<style scoped>
 .cyber-nav {
   position: fixed;
   top: 0;
@@ -163,32 +102,6 @@ html, body {
   }
 }
 
-/* Element Plus 全局样式 */
-.el-button {
-  background: transparent !important;
-  border: 1px solid var(--cyber-text) !important;
-  color: var(--cyber-text) !important;
-  font-family: 'Share Tech Mono', monospace !important;
-  transition: all 0.3s ease;
-}
-
-.el-button:hover {
-  background: var(--cyber-glow) !important;
-  color: #fff !important;
-  box-shadow: 0 0 10px var(--cyber-glow);
-}
-
-/* 卡片样式 */
-.el-card {
-  background: rgba(0, 0, 0, 0.2) !important;
-  border: 1px solid var(--cyber-border) !important;
-  backdrop-filter: blur(5px);
-}
-
-.el-card__header {
-  border-bottom: 1px solid var(--cyber-border) !important;
-}
-
 /* 响应式设计 */
 @media (max-width: 768px) {
   .cyber-nav {
@@ -204,4 +117,4 @@ html, body {
     font-size: 0.8em;
   }
 }
-</style>
+</style> 
