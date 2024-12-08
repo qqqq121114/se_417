@@ -10,24 +10,19 @@
         <h2>{{ userInfo.username }}</h2>
         <p class="join-date">加入时间：{{ formatDate(userInfo.createdAt) }}</p>
         
-        <el-form ref="profileForm" :model="form" label-position="top">
-          <el-form-item label="邮箱">
-            <el-input 
-              v-model="form.email" 
-              placeholder="请输入邮箱"
-              clearable
-            />
+        <el-form ref="profileForm" :model="profileForm" label-position="top" :rules="profileRules">
+          <el-form-item label="邮箱" prop="email">
+            <el-input v-model="profileForm.email" placeholder="请输入邮箱" />
           </el-form-item>
           
-          <el-form-item label="个人简介">
+          <el-form-item label="个人简介" prop="bio">
             <el-input
-              v-model="form.bio"
+              v-model="profileForm.bio"
               type="textarea"
               :rows="4"
               placeholder="写点什么介绍自己..."
               maxlength="200"
               show-word-limit
-              resize="none"
             />
           </el-form-item>
 
@@ -114,41 +109,17 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElLoading } from 'element-plus'
 import axios from 'axios'
-
-// 创建 axios 实例
-const api = axios.create({
-  baseURL: 'http://localhost:3001',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-})
-
-// 添加请求拦截器
-api.interceptors.request.use(
-  config => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
-    return config
-  },
-  error => {
-    return Promise.reject(error)
-  }
-)
 
 const router = useRouter()
 const userInfo = ref({})
 const notes = ref([])
 
 const updating = ref(false)
-
-// 使用 reactive 来管理表单数据
-const form = reactive({
+const profileForm = ref({
   email: '',
   bio: ''
 })
@@ -185,34 +156,30 @@ const profileRules = {
 // 获取用户信息
 const fetchUserInfo = async () => {
   try {
-    console.log('开始获取用户信息...')
-    const response = await api.get('/api/users/profile')
-    console.log('获取到的用户信息:', response.data)
-
-    if (response.data) {
-      userInfo.value = response.data
-      form.email = response.data.email || ''
-      form.bio = response.data.bio || ''
-    } else {
-      throw new Error('获取用户信息失败')
+    const token = localStorage.getItem('token')
+    if (!token) {
+      router.push('/login')
+      return
     }
-  } catch (error) {
-    console.error('获取用户信息失败:', error)
-    console.error('错误详情:', {
-      message: error.message,
-      response: error.response?.data,
-      status: error.response?.status
-    })
 
+    console.log('正在获取用户信息...')
+    const response = await axios.get('http://localhost:3001/api/users/profile', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    
+    console.log('获取到的用户信息:', response.data)
+    userInfo.value = response.data
+    
+    // 更新表单数据
+    profileForm.value.email = response.data.email || ''
+    profileForm.value.bio = response.data.bio || ''
+  } catch (error) {
+    console.error('获取用户信息错误:', error.response || error)
     if (error.response?.status === 401) {
       ElMessage.error('登录已过期，请重新登录')
       router.push('/login')
     } else {
-      ElMessage.error(
-        error.response?.data?.message || 
-        error.message || 
-        '获取用户信息失败'
-      )
+      ElMessage.error('获取用户信息失败')
     }
   }
 }
@@ -246,51 +213,48 @@ const fetchNotes = async () => {
 // 更新个人信息
 const updateProfile = async () => {
   try {
-    console.log('开始更新用户信息');
-    console.log('准备发送的数据:', {
-      email: form.email,
-      bio: form.bio
-    });
-
-    const token = localStorage.getItem('token');
+    updating.value = true
+    const token = localStorage.getItem('token')
     if (!token) {
-      throw new Error('未找到认证令牌');
+      ElMessage.error('登录已过期，请重新登录')
+      router.push('/login')
+      return
     }
+
+    console.log('正在保存用户信息:', {
+      email: profileForm.value.email,
+      bio: profileForm.value.bio
+    })
 
     const response = await axios.put(
       'http://localhost:3001/api/users/profile',
       {
-        email: form.email,
-        bio: form.bio
+        email: profileForm.value.email,
+        bio: profileForm.value.bio
       },
       {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        withCredentials: true
+        headers: { Authorization: `Bearer ${token}` }
       }
-    );
+    )
 
-    console.log('更新成功，服务器响应:', response.data);
-    ElMessage.success('个人信息更新成功');
-    
-    // 更新本地状态
-    userInfo.value = response.data.user;
+    console.log('服务器响应:', response.data)
+
+    // 更新本地用户信息
+    userInfo.value = { ...userInfo.value, ...response.data.user }
+    ElMessage.success('个人信息更新成功')
+
+    // 立即重新获取用户信息以确保数据同步
+    await fetchUserInfo()
   } catch (error) {
-    console.error('更新失败:', error);
-    console.error('错误详情:', {
-      message: error.message,
-      response: error.response?.data,
-      status: error.response?.status
-    });
-    
-    let errorMessage = '更新失败';
-    if (error.response) {
-      errorMessage = error.response.data.message || errorMessage;
+    console.error('更新个人信息错误:', error.response || error)
+    if (error.response?.status === 401) {
+      ElMessage.error('登录已过期，请重新登录')
+      router.push('/login')
+    } else {
+      ElMessage.error(error.response?.data?.message || '更新个人信息失败')
     }
-    
-    ElMessage.error(errorMessage);
+  } finally {
+    updating.value = false
   }
 }
 
@@ -395,7 +359,6 @@ const formatDate = (date) => {
 }
 
 onMounted(() => {
-  console.log('组件已挂载，开始获取用户信息')
   fetchUserInfo()
   fetchNotes()
 })
@@ -457,7 +420,7 @@ onMounted(() => {
   border-color: #ff00ff !important;
 }
 
-/* 文��计数器样式 */
+/* 文字计数器样式 */
 :deep(.el-input__count-inner),
 :deep(.el-textarea__count) {
   background: transparent !important;

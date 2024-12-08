@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
-const noteController = require('../controllers/noteController');
 const authMiddleware = require('../middleware/authMiddleware');
 
 // 路由日志中间件
@@ -49,19 +48,6 @@ router.put('/profile', routeLogger, authMiddleware, async (req, res, next) => {
     next(error);
   }
 });
-
-// 笔记相关路由
-// 获取所有笔记
-router.get('/notes', routeLogger, authMiddleware, noteController.getNotes);
-
-// 创建笔记
-router.post('/notes', routeLogger, authMiddleware, noteController.createNote);
-
-// 更新笔记
-router.put('/notes/:id', routeLogger, authMiddleware, noteController.updateNote);
-
-// 删除笔记
-router.delete('/notes/:id', routeLogger, authMiddleware, noteController.deleteNote);
 
 // 添加错误处理
 router.use(errorHandler);

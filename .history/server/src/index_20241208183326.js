@@ -14,8 +14,7 @@ const app = express();
 // CORS配置
 app.use(cors({
   origin: 'http://localhost:5173', // Vue开发服务器地址
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'] // 明确允许的方法
+  credentials: true
 }));
 
 // 请求日志中间件
@@ -31,15 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // API 路由
-app.use('/api/users', (req, res, next) => {
-  console.log('API Request:', {
-    method: req.method,
-    path: req.path,
-    body: req.body,
-    headers: req.headers
-  });
-  next();
-}, userRoutes);
+app.use('/api/users', userRoutes);
 
 // 根路由
 app.get('/', (req, res) => {
@@ -80,26 +71,18 @@ app.use((req, res) => {
 });
 
 // 数据库连接和服务器启动
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://mongodb:27017/myapp';
-console.log('Connecting to MongoDB at:', MONGODB_URI);
-
-mongoose.connect(MONGODB_URI)
+mongoose.connect('mongodb://127.0.0.1:27017/myapp', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 .then(() => {
   console.log('MongoDB connected successfully');
   
   // 启动服务器
   const PORT = process.env.PORT || 3001;
-  const server = app.listen(PORT, () => {
+  app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     console.log('CORS enabled for:', 'http://localhost:5173');
-    
-    // 打印所有注册的路由
-    console.log('\nRegistered routes:');
-    app._router.stack.forEach(r => {
-      if (r.route && r.route.path) {
-        console.log(`${Object.keys(r.route.methods)} ${r.route.path}`);
-      }
-    });
   });
 })
 .catch(err => {

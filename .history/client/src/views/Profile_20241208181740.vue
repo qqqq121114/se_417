@@ -178,7 +178,7 @@ const profileRules = {
     { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
   ],
   bio: [
-    { max: 200, message: '个人简介不能超过200个字符', trigger: 'blur' }
+    { max: 200, message: '个人简介���能超过200个字符', trigger: 'blur' }
   ]
 }
 
@@ -246,51 +246,52 @@ const fetchNotes = async () => {
 // 更新个人信息
 const updateProfile = async () => {
   try {
-    console.log('开始更新用户信息');
-    console.log('准备发送的数据:', {
-      email: form.email,
-      bio: form.bio
-    });
+    updating.value = true
 
-    const token = localStorage.getItem('token');
-    if (!token) {
-      throw new Error('未找到认证令牌');
+    // 验证表单数据
+    if (!form.email) {
+      ElMessage.error('请输入邮箱地址')
+      return
     }
 
-    const response = await axios.put(
-      'http://localhost:3001/api/users/profile',
-      {
-        email: form.email,
-        bio: form.bio
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        withCredentials: true
-      }
-    );
+    const data = {
+      email: form.email,
+      bio: form.bio || ''
+    }
 
-    console.log('更新成功，服务器响应:', response.data);
-    ElMessage.success('个人信息更新成功');
-    
-    // 更新本地状态
-    userInfo.value = response.data.user;
+    console.log('准备发送的数据:', data)
+
+    const response = await api.put('/api/users/profile', data)
+    console.log('服务器响应:', response.data)
+
+    if (response.data && response.data.user) {
+      userInfo.value = response.data.user
+      form.email = response.data.user.email || ''
+      form.bio = response.data.user.bio || ''
+      ElMessage.success('个人信息更新成功')
+    } else {
+      throw new Error('服务器返回数据格式错误')
+    }
   } catch (error) {
-    console.error('更新失败:', error);
+    console.error('更新失败:', error)
     console.error('错误详情:', {
       message: error.message,
       response: error.response?.data,
       status: error.response?.status
-    });
-    
-    let errorMessage = '更新失败';
-    if (error.response) {
-      errorMessage = error.response.data.message || errorMessage;
+    })
+
+    if (error.response?.status === 401) {
+      ElMessage.error('登录已过期，请重新登录')
+      router.push('/login')
+    } else {
+      ElMessage.error(
+        error.response?.data?.message || 
+        error.message || 
+        '更新个人信息失败'
+      )
     }
-    
-    ElMessage.error(errorMessage);
+  } finally {
+    updating.value = false
   }
 }
 
@@ -457,7 +458,7 @@ onMounted(() => {
   border-color: #ff00ff !important;
 }
 
-/* 文��计数器样式 */
+/* 文字计数器样式 */
 :deep(.el-input__count-inner),
 :deep(.el-textarea__count) {
   background: transparent !important;

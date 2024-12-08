@@ -80,10 +80,7 @@ app.use((req, res) => {
 });
 
 // 数据库连接和服务器启动
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://mongodb:27017/myapp';
-console.log('Connecting to MongoDB at:', MONGODB_URI);
-
-mongoose.connect(MONGODB_URI)
+mongoose.connect('mongodb://127.0.0.1:27017/myapp')
 .then(() => {
   console.log('MongoDB connected successfully');
   
