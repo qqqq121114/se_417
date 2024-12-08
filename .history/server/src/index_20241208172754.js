@@ -22,7 +22,6 @@ app.use((req, res, next) => {
 // 基础中间件
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // 创建上传目录
 const uploadsPath = path.join(__dirname, '../uploads');
@@ -46,8 +45,6 @@ app.use('/uploads', express.static(uploadsPath));
 // API 路由
 app.use('/api/users', (req, res, next) => {
   console.log('User route accessed:', req.method, req.url);
-  console.log('Request body:', req.body);
-  console.log('Request files:', req.files);
   next();
 }, userRoutes);
 
@@ -73,12 +70,6 @@ mongoose.connect('mongodb://mongodb:27017/myapp', {
 // 错误处理中间件
 app.use((err, req, res, next) => {
   console.error('Server Error:', err);
-  if (err.name === 'MulterError') {
-    return res.status(400).json({
-      message: '文件上传错误',
-      error: err.message
-    });
-  }
   res.status(500).json({ 
     message: '服务器错误', 
     error: err.message,
@@ -90,19 +81,17 @@ app.use((err, req, res, next) => {
 app.use((req, res) => {
   console.log('404 Not Found:', req.method, req.url);
   console.log('Request headers:', req.headers);
-  console.log('Request body:', req.body);
   res.status(404).json({ 
     message: '请求的资源不存在',
     path: req.url,
     method: req.method,
-    headers: req.headers,
-    body: req.body
+    headers: req.headers
   });
 });
 
 // 启动服务器
 const PORT = process.env.PORT || 3001;
-const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`Static files are served from: ${uploadsPath}`);
   console.log(`Avatar files are served from: ${avatarsPath}`);
@@ -119,17 +108,5 @@ const server = app.listen(PORT, () => {
         }
       });
     }
-  });
-});
-
-// 优雅关闭
-process.on('SIGTERM', () => {
-  console.log('SIGTERM signal received: closing HTTP server');
-  server.close(() => {
-    console.log('HTTP server closed');
-    mongoose.connection.close(false, () => {
-      console.log('MongoDB connection closed');
-      process.exit(0);
-    });
   });
 }); 

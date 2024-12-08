@@ -10,12 +10,12 @@
         <h2>{{ userInfo.username }}</h2>
         <p class="join-date">加入时间：{{ formatDate(userInfo.createdAt) }}</p>
         
-        <el-form ref="profileForm" :model="profileForm" label-position="top" :rules="profileRules">
-          <el-form-item label="邮箱" prop="email">
+        <el-form ref="profileForm" :model="profileForm" label-position="top">
+          <el-form-item label="邮箱">
             <el-input v-model="profileForm.email" placeholder="请输入邮箱" />
           </el-form-item>
           
-          <el-form-item label="个人简介" prop="bio">
+          <el-form-item label="个人简介">
             <el-input
               v-model="profileForm.bio"
               type="textarea"
@@ -26,13 +26,13 @@
             />
           </el-form-item>
 
-          <el-button type="primary" @click="updateProfile" :loading="updating">保存修改</el-button>
+          <el-button type="primary" @click="updateProfile">保存修改</el-button>
         </el-form>
       </div>
 
       <div class="settings-section">
         <h3>个性化设置</h3>
-        <el-form :model="settingsForm" label-position="top" >
+        <el-form :model="settingsForm" label-position="top" color="var(--el-color-primary)">
           <el-form-item label="主题">
             <el-select v-model="settingsForm.theme" @change="updateSettings">
               <el-option label="赛博朋克" value="cyberpunk" />
@@ -118,7 +118,6 @@ const router = useRouter()
 const userInfo = ref({})
 const notes = ref([])
 
-const updating = ref(false)
 const profileForm = ref({
   email: '',
   bio: ''
@@ -141,17 +140,6 @@ const noteDialog = ref({
 
 // 使用 base64 编码的默认头像
 const defaultAvatar = ref('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzk5OSIgZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTAgM2MyLjY3IDAgNC41NCAyLjU4IDQuNSA1LjQ1IDAgMi45NS0xLjgzIDUuNDUtNC41IDUuNDVzLTQuNS0yLjUtNC41LTUuNDVjLS4wMy0yLjg3IDEuODMtNS40NSA0LjUtNS40NXptNS43MiAxMy41M2MtLjMyLS44NC0yLjE5LTEuNDQtNS43Mi0xLjQ0cy01LjQxLjYtNS43MiAxLjQ0QTcuOTggNy45OCAwIDAgMCAxMiAyMGE3Ljk4IDcuOTggMCAwIDAgNS43Mi0xLjQ3eiIvPjwvc3ZnPg==')
-
-// 表单验证规则
-const profileRules = {
-  email: [
-    { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-    { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
-  ],
-  bio: [
-    { max: 200, message: '个人简介不能超过200个字符', trigger: 'blur' }
-  ]
-}
 
 // 获取用户信息
 const fetchUserInfo = async () => {
@@ -211,41 +199,19 @@ const fetchNotes = async () => {
 // 更新个人信息
 const updateProfile = async () => {
   try {
-    updating.value = true
     const token = localStorage.getItem('token')
-    if (!token) {
-      ElMessage.error('登录已过期，请重新登录')
-      router.push('/login')
-      return
-    }
-
-    // 表单验证
-    await profileForm.value.$validate()
-
     const response = await axios.put(
       'http://localhost:3001/api/users/profile',
-      {
-        email: profileForm.value.email,
-        bio: profileForm.value.bio
-      },
+      profileForm.value,
       {
         headers: { Authorization: `Bearer ${token}` }
       }
     )
-
-    // 更新本地用户信息
     userInfo.value = { ...userInfo.value, ...response.data.user }
     ElMessage.success('个人信息更新成功')
   } catch (error) {
-    if (error.response?.status === 401) {
-      ElMessage.error('登录已过期，请重新登录')
-      router.push('/login')
-    } else {
-      console.error('更新个人信息错误:', error)
-      ElMessage.error(error.response?.data?.message || '更新个人信息失败')
-    }
-  } finally {
-    updating.value = false
+    console.error('Error updating profile:', error)
+    ElMessage.error('更新个人信息失败')
   }
 }
 
@@ -525,132 +491,53 @@ onMounted(() => {
   }
 }
 
-/* Select 下拉框样式 */
-:deep(.el-select) {
-  width: 100%;
-}
-
+/* 下拉框的基础样式 */
 :deep(.el-select .el-input__wrapper) {
   background-color: #1a1a1a !important;
   border: 1px solid #00ffff !important;
-  box-shadow: none !important;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2) !important;
 }
 
-:deep(.el-select:hover .el-input__wrapper) {
-  border-color: #00ffff !important;
-}
-
+/* 下拉框文字颜色 */
 :deep(.el-select .el-input__inner) {
   color: #00ffff !important;
-  background-color: #1a1a1a !important;
+  background-color: transparent !important;
 }
 
+/* 下拉箭头颜色 */
 :deep(.el-select .el-input .el-select__caret) {
   color: #00ffff !important;
 }
 
 /* 下拉菜单样式 */
-:deep(.el-popper.el-select__popper),
-:deep(.el-select__popper.el-popper),
-:deep(.el-select-dropdown.el-popper) {
+:deep(.el-select-dropdown) {
   background-color: #1a1a1a !important;
   border: 1px solid #00ffff !important;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.3) !important;
 }
 
+/* 下拉选项样式 */
 :deep(.el-select-dropdown__item) {
   color: #00ffff !important;
-  background: #1a1a1a !important;
+  background-color: transparent !important;
 }
 
+/* 下拉选项悬停样式 */
 :deep(.el-select-dropdown__item.hover),
 :deep(.el-select-dropdown__item:hover) {
   background-color: rgba(0, 255, 255, 0.1) !important;
-  color: #ff00ff !important;
 }
 
+/* 选中选项样式 */
 :deep(.el-select-dropdown__item.selected) {
   color: #ff00ff !important;
   background-color: rgba(0, 255, 255, 0.2) !important;
 }
 
-/* 修复下拉框头和背景 */
-:deep(.el-popper.is-light),
-:deep(.el-select-dropdown) {
-  background-color: #1a1a1a !important;
-  border-color: #00ffff !important;
-}
-
-:deep(.el-popper.is-light .el-popper__arrow::before) {
-  background: #1a1a1a !important;
-  border-color: #00ffff !important;
-}
-
-:deep(.el-scrollbar),
-:deep(.el-select-dropdown .el-scrollbar__wrap) {
-  background-color: #1a1a1a !important;
-}
-
-:deep(.el-select-dropdown .el-scrollbar__view) {
-  background-color: #1a1a1a !important;
-}
-
 /* 确保下拉框在所有状态下保持样式 */
-:deep(.el-select .el-input.is-focus .el-input__wrapper) {
+:deep(.el-input__wrapper.is-focus),
+:deep(.el-select:hover .el-input__wrapper) {
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.3) !important;
-}
-
-/* 添加保存按钮的加载状态样式 */
-:deep(.el-button--primary.is-loading) {
-  background: linear-gradient(45deg, #003333, #330033) !important;
-  opacity: 0.8;
-}
-
-/* 表单验证错误提示样式 */
-:deep(.el-form-item__error) {
-  color: #ff4444 !important;
-  text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
-}
-
-/* 文本框字数统计器的赛博朋克风格 */
-:deep(.el-input-count),
-:deep(.el-input__count),
-:deep(.el-textarea__count) {
-  background: transparent !important;
-  color: #00ffff !important;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-}
-
-:deep(.el-input-count-inner),
-:deep(.el-input__count-inner),
-:deep(.el-textarea__wordcount) {
-  background: transparent !important;
-  color: #00ffff !important;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-}
-
-/* 确保文本框本身的样式 */
-:deep(.el-textarea__inner) {
-  background-color: #1a1a1a !important;
-  border: 1px solid #00ffff !important;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2) !important;
-  color: #00ffff !important;
-  resize: none !important;
-}
-
-:deep(.el-textarea__inner:focus) {
-  border-color: #ff00ff !important;
-  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3) !important;
-}
-
-/* 覆盖所有可能的白色背景 */
-:deep(.el-textarea) {
-  --el-input-count-color: #00ffff !important;
-  --el-input-count-background: transparent !important;
-}
-
-:deep(.el-textarea .el-input__count) {
-  background: transparent !important;
-  color: #00ffff !important;
+  border-color: #00ffff !important;
 }
 </style> 

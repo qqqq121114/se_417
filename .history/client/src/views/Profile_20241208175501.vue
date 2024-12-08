@@ -574,7 +574,7 @@ onMounted(() => {
   background-color: rgba(0, 255, 255, 0.2) !important;
 }
 
-/* 修复下拉框头和背景 */
+/* 修复下拉框���头和背景 */
 :deep(.el-popper.is-light),
 :deep(.el-select-dropdown) {
   background-color: #1a1a1a !important;
@@ -613,44 +613,15 @@ onMounted(() => {
 }
 
 /* 文本框字数统计器的赛博朋克风格 */
-:deep(.el-input-count),
-:deep(.el-input__count),
+:deep(.el-input__count-inner) {
+  background-color: transparent !important;
+  color: #00ffff !important;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
 :deep(.el-textarea__count) {
-  background: transparent !important;
   color: #00ffff !important;
+  background-color: transparent !important;
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-}
-
-:deep(.el-input-count-inner),
-:deep(.el-input__count-inner),
-:deep(.el-textarea__wordcount) {
-  background: transparent !important;
-  color: #00ffff !important;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-}
-
-/* 确保文本框本身的样式 */
-:deep(.el-textarea__inner) {
-  background-color: #1a1a1a !important;
-  border: 1px solid #00ffff !important;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2) !important;
-  color: #00ffff !important;
-  resize: none !important;
-}
-
-:deep(.el-textarea__inner:focus) {
-  border-color: #ff00ff !important;
-  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3) !important;
-}
-
-/* 覆盖所有可能的白色背景 */
-:deep(.el-textarea) {
-  --el-input-count-color: #00ffff !important;
-  --el-input-count-background: transparent !important;
-}
-
-:deep(.el-textarea .el-input__count) {
-  background: transparent !important;
-  color: #00ffff !important;
 }
 </style> 
