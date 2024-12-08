@@ -12,7 +12,7 @@
         <el-form-item prop="username" label="Username">
           <el-input 
             v-model="form.username" 
-            placeholder="Enter your username"
+            placeholder="Enter your username (3-20 characters)"
             class="cyber-input"
           ></el-input>
         </el-form-item>
@@ -20,7 +20,7 @@
           <el-input 
             v-model="form.password" 
             type="password" 
-            placeholder="Enter your password"
+            placeholder="Enter your password (min 6 characters)"
             show-password
             class="cyber-input"
           ></el-input>

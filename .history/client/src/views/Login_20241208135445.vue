@@ -12,7 +12,7 @@
         <el-form-item prop="username" label="Username">
           <el-input 
             v-model="form.username" 
-            placeholder="Enter your username"
+            placeholder="Enter your username (3-20 characters)"
             class="cyber-input"
           ></el-input>
         </el-form-item>
@@ -20,7 +20,7 @@
           <el-input 
             v-model="form.password" 
             type="password" 
-            placeholder="Enter your password"
+            placeholder="Enter your password (min 6 characters)"
             show-password
             class="cyber-input"
           ></el-input>
@@ -125,7 +125,7 @@ const submitForm = async () => {
   font-size: 4vw;
   width: 60vw;
   color: var(--cyber-text);
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 0.1em;
   margin-bottom: 40px;
   text-shadow: 0 0 20px var(--cyber-glow);
@@ -164,7 +164,7 @@ const submitForm = async () => {
   font-size: 1.2em;
   padding-bottom: 15px;
   text-shadow: 0 0 10px rgba(255, 184, 0, 0.5);
-  text-transform: capitalize;
+  text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-left: 5px;
 }
